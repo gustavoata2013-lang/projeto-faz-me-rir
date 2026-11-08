@@ -21,11 +21,11 @@ const Footer = {
     return `
     <footer class="footer" data-footer>
       <div class="footer__container">
-        ${cfg.footer.columns.map(col => `
+        ${(cfg.footer.columns || []).map(col => `
           <div class="footer__col">
-            <h4>${Utils.escapeHtml(col.title)}</h4>
+            <h4>${Utils.escapeHtml(col.title || '')}</h4>
             <ul>
-              ${col.links.map(l => `<li><a href="${resolve(l.href)}">${Utils.escapeHtml(l.label)}</a></li>`).join('')}
+              ${(col.links || []).map(l => `<li><a href="${resolve(l.href)}">${Utils.escapeHtml(l.label || '')}</a></li>`).join('')}
             </ul>
           </div>
         `).join('')}
@@ -33,7 +33,7 @@ const Footer = {
       <div class="footer__bottom">
         <p>${Utils.escapeHtml(copyright)}</p>
         <div class="footer__social">
-          ${cfg.social.map(s => `<a href="${s.href || '#'}" aria-label="${Utils.escapeHtml(s.label)}" title="${Utils.escapeHtml(s.label)}">${this.ICONS[s.icon] || ''}</a>`).join('')}
+          ${(cfg.social || []).map(s => `<a href="${s.href || '#'}" aria-label="${Utils.escapeHtml(s.label || '')}" title="${Utils.escapeHtml(s.label || '')}">${this.ICONS[s.icon] || ''}</a>`).join('')}
         </div>
       </div>
     </footer>

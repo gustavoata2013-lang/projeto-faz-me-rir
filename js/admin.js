@@ -4,18 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadState = () => {
     const cfg = SiteConfig.get();
     return {
-      banners: cfg.banners.map(b => ({ ...b })),
-      categories: cfg.categories.map(c => ({ ...c })),
+      banners: (cfg.banners || []).map(b => ({ ...b })),
+      categories: (cfg.categories || []).map(c => ({ ...c })),
       footer: {
         email: cfg.footer.email,
         copyright: cfg.footer.copyright,
-        columns: cfg.footer.columns.map(col => ({
+        columns: (cfg.footer.columns || []).map(col => ({
           title: col.title,
-          links: col.links.map(l => ({ ...l }))
+          links: (col.links || []).map(l => ({ ...l }))
         }))
       },
       pix: { code: cfg.pix.code },
-      social: cfg.social.map(s => ({ ...s }))
+      social: (cfg.social || []).map(s => ({ ...s }))
     };
   };
 

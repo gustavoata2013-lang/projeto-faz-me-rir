@@ -67,11 +67,11 @@ const SiteConfig = {
     let stored = {};
     try { stored = JSON.parse(localStorage.getItem(this.KEY)) || {}; } catch { stored = {}; }
     return {
-      footer: stored.footer || this.DEFAULTS.footer,
-      social: stored.social || this.DEFAULTS.social,
-      categories: stored.categories || this.DEFAULTS.categories,
-      banners: stored.banners || this.DEFAULTS.banners,
-      pix: stored.pix || this.DEFAULTS.pix
+      footer: (stored.footer && Array.isArray(stored.footer.columns)) ? stored.footer : this.DEFAULTS.footer,
+      social: Array.isArray(stored.social) ? stored.social : this.DEFAULTS.social,
+      categories: Array.isArray(stored.categories) ? stored.categories : this.DEFAULTS.categories,
+      banners: Array.isArray(stored.banners) ? stored.banners : this.DEFAULTS.banners,
+      pix: (stored.pix && stored.pix.code) ? stored.pix : this.DEFAULTS.pix
     };
   },
 
