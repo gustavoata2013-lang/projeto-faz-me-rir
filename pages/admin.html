@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - Faça Me Rir</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__container">
+      <div class="header__left">
+        <a href="../index.html" class="header__logo">
+          <span class="header__logo-img">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10.2"/></svg>
+          </span>
+          <span class="header__logo-text">Faça Me Rir</span>
+        </a>
+      </div>
+      <div class="header__right">
+        <button class="header__icon-btn" id="theme-toggle" aria-label="Alternar tema" title="Alternar tema"></button>
+        <a href="../index.html" class="btn btn--outline">← Voltar ao site</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <h1 class="ads__title">Painel Administrativo</h1>
+    <p class="section-header__hint" style="margin-bottom: 1.5rem;">Gerencie banners, categorias e o rodapé do site. As alterações são refletidas em todas as páginas.</p>
+    <div class="tabs" role="tablist" id="admin-tabs">
+      <button class="tab tab--active" data-tab="banners" role="tab" aria-selected="true">🖼 Banners</button>
+      <button class="tab" data-tab="categorias" role="tab" aria-selected="false">🎮 Categorias</button>
+      <button class="tab" data-tab="geral" role="tab" aria-selected="false">⚙️ Geral &amp; Rodapé</button>
+    </div>
+    <div id="admin-content" class="admin-panel"></div>
+    <div class="admin-actions">
+      <button class="btn btn--outline" id="admin-reset">Restaurar padrões</button>
+      <button class="btn btn--primary btn--lg" id="admin-save">Salvar Alterações</button>
+    </div>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="../js/api-mock.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/site-config.js"></script>
+  <script src="../js/footer.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
