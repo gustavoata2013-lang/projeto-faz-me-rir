@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const content = document.getElementById('admin-content');
+  const tabsEl = document.getElementById('admin-tabs');
+  const actionsEl = document.querySelector('.admin-actions');
+  const hintEl = document.querySelector('main .section-header__hint');
+
+  const ADMIN_PASSWORD = 'admin123';
+  const UNLOCK_KEY = 'fmr_admin_unlocked';
 
   const loadState = () => {
     const cfg = SiteConfig.get();
@@ -247,5 +253,43 @@ document.addEventListener('DOMContentLoaded', () => {
     Toast.show('Configurações restauradas para os padrões.', 'info');
   });
 
-  render('banners');
+  // ===== Bloqueio por senha =====
+  const showLock = () => {
+    tabsEl.style.display = 'none';
+    actionsEl.style.display = 'none';
+    if (hintEl) hintEl.style.display = 'none';
+    content.innerHTML = `
+      <div class="admin-lock">
+        <div class="admin-lock__icon">🔒</div>
+        <h2 class="admin-lock__title">Acesso restrito</h2>
+        <p class="admin-lock__hint">Digite a senha de administrador para continuar.</p>
+        <form id="admin-lock-form" autocomplete="off">
+          <input type="password" id="admin-password" class="form__input" placeholder="Senha de acesso">
+          <p class="admin-lock__error" id="admin-lock-error" hidden>Senha incorreta. Tente novamente.</p>
+          <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">Entrar</button>
+        </form>
+      </div>
+    `;
+    document.getElementById('admin-lock-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = document.getElementById('admin-password').value;
+      if (value === ADMIN_PASSWORD) {
+        sessionStorage.setItem(UNLOCK_KEY, '1');
+        tabsEl.style.display = '';
+        actionsEl.style.display = '';
+        if (hintEl) hintEl.style.display = '';
+        render('banners');
+        Toast.show('Acesso liberado!', 'success');
+      } else {
+        document.getElementById('admin-lock-error').hidden = false;
+        Toast.error('Senha incorreta.');
+      }
+    });
+  };
+
+  if (!sessionStorage.getItem(UNLOCK_KEY)) {
+    showLock();
+  } else {
+    render('banners');
+  }
 });
